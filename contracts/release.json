@@ -1,0 +1,17 @@
+{
+  "名称": "叙事签发契约",
+  "必填字段": [
+    "release_id",
+    "unit_id",
+    "channel_id",
+    "body",
+    "effective_from"
+  ],
+  "可选字段": [
+    "exhibit_ids",
+    "evidence_ids"
+  ],
+  "幂等": "release_id 与内容摘要都相同的重试返回原回执；编号相同但摘要不同拒绝覆盖",
+  "固定": "签发时把所引用展品与证据的快照存入 release_pins，之后不随登记变化",
+  "生效": "effective_from 晚于当前时间时为待生效（pending），由 run_due/advance_time 激活且仅激活一次；待生效文字可被新签发替换，公众看过的版本只能通过连续勘误说明变化"
+}
