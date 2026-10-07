@@ -1,0 +1,17 @@
+{
+  "名称": "叙事签发输入契约",
+  "必填字段": ["release_id", "unit_id", "curator_id", "texts"],
+  "字段说明": {
+    "release_id": "签发编号；编号相同且内容摘要不同将停止覆盖",
+    "unit_id": "展陈单元",
+    "curator_id": "签发策展人",
+    "summary": "本次签发摘要",
+    "exhibit_ids": "固定引用的展品",
+    "evidence_ids": "固定引用的年代证据",
+    "interp_ids": "固定引用的解释（须无未决异议）",
+    "texts": "各渠道文本：channel∈label/guide/press；effective_from 为生效时间"
+  },
+  "幂等": "同 release_id 且规范内容摘要相同的重试返回原回执（replayed=true）",
+  "冲突": "同 release_id 但摘要不同抛出 ReleaseConflict，不覆盖既有签发",
+  "固定引用": "签发时把展品/证据/解释快照写入 pins，事后变化不影响该回执"
+}
